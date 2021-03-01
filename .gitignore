@@ -119,6 +119,7 @@ GitHub.sublime-settings
 
 # Webpack
 .idea/
+.leadmanager/
 .vscode/
 node_modules/
 build
