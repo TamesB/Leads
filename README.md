@@ -1,5 +1,9 @@
 # Leads
-A basic full-stack boilerplate web application made with Django REST, React, Redux, and Semantic UI.
+A basic full-stack boilerplate web application.
+The backend uses the Django REST Framework, the frontend is made with React, Redux and Semantic UI.
 
 ## Features
-User authentication, Registering, A simple personalized leads list with basic CRUD functionalities.
+* User authentication (Log-in, Register, Log-out)
+* Private Routing (react-router-dom)
+* CRUD Leads (Form for making a lead (POST), GET user leads, DELETE lead)
+* Alert system (react-alert)
