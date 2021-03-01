@@ -1,2 +1,2 @@
 # Leads
-A basic Leads app made with Django REST and React
+A basic application boilerplate made with Django REST, React, Redux, and Semantic UI.
