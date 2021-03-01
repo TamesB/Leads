@@ -17,8 +17,15 @@ export const loadUser = () => (dispatch, getState) => {
     // Set User Loading state
     dispatch({ type: USER_LOADING });
     
+    // Headers
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
     axios
-        .get("/api/auth/user", tokenConfig(getState))
+        .get("/api/auth/user", tokenConfig(getState), config)
         .then(res => {
             dispatch({
                 type: USER_LOADED,
@@ -36,6 +43,8 @@ export const loadUser = () => (dispatch, getState) => {
 
 // login user
 export const login = (username, password) => dispatch => {
+    dispatch({ type: USER_LOADING });
+
     // Headers
     const config = {
         headers: {
@@ -45,6 +54,7 @@ export const login = (username, password) => dispatch => {
     
     // Request Body
     const body = JSON.stringify({ username, password });
+      
 
     axios
         .post("/api/auth/login", body, config)
@@ -65,6 +75,7 @@ export const login = (username, password) => dispatch => {
 
 // Register user
 export const register = ({username, password, email}) => dispatch => {
+    dispatch({ type: USER_LOADING });
 
     // Headers
     const config = {
@@ -96,9 +107,16 @@ export const register = ({username, password, email}) => dispatch => {
 // LOGOUT USER
 export const logout = () => (dispatch, getState) => {
     
+    // Headers
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
     // null as body for some reason
     axios
-        .post("/api/auth/logout/", null, tokenConfig(getState))
+        .post("/api/auth/logout/", null, tokenConfig(getState), config)
         .then(res => {
             dispatch({
                 type: LOGOUT_SUCCESS,
@@ -119,12 +137,11 @@ export const tokenConfig = getState => {
     // Get token from state
     const token = getState().auth.token;
 
-    // Headers
+    // Init header
     const config = {
         headers: {
-            'Content-Type': 'application/json'
         }
-    };
+    }
 
     // If token, add to headers config
     if(token) {
@@ -132,4 +149,8 @@ export const tokenConfig = getState => {
     };
 
     return config;
+}
+
+function wait(ms, value) {
+    return new Promise(resolve => setTimeout(resolve, ms, value));
 }

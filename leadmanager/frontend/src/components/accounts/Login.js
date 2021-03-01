@@ -10,18 +10,20 @@ import { Fragment } from 'react/cjs/react.production.min';
 export class Login extends Component {
     state = {
         username: '',
-        password: ''
+        password: '',
     }
 
     static propTypes = {
         login: PropTypes.func.isRequired,
-        isAuthenticated: PropTypes.bool
+        isAuthenticated: PropTypes.bool,
+        isLoading: PropTypes.bool
     }
 
     // Logic after form submitted
     onSubmit = e => {
         e.preventDefault();
         this.props.login(this.state.username, this.state.password);
+
     }
 
     // Allows input
@@ -59,8 +61,7 @@ export class Login extends Component {
                   onChange={this.onChange}
                   value={password}
                 />
-      
-                <Button type="submit" content='Login' primary />
+              <Button type="submit" content='Login' loading={this.props.isLoading} primary></Button>
               </Form>
             </Grid.Column>
       
@@ -83,7 +84,8 @@ export class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  isLoading: state.auth.isLoading
 });
 
 export default connect(mapStateToProps, { login })(Login);

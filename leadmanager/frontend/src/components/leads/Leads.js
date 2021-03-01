@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux';
+import { Link } from "react-router-dom";
+
 import PropTypes from 'prop-types';
 import { getLeads, deleteLead } from '../../actions/leads';
 import { Header, Table, Button, Icon } from 'semantic-ui-react'
@@ -26,6 +28,7 @@ export class Leads extends Component {
                             <Table.HeaderCell>Name</Table.HeaderCell>
                             <Table.HeaderCell>E-mail</Table.HeaderCell>
                             <Table.HeaderCell>Message</Table.HeaderCell>
+                            <Table.HeaderCell>Attachment</Table.HeaderCell>
                             <Table.HeaderCell>&nbsp;</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
@@ -37,6 +40,13 @@ export class Leads extends Component {
                                 <Table.Cell>{lead.name}</Table.Cell>
                                 <Table.Cell>{lead.email}</Table.Cell>
                                 <Table.Cell>{lead.message}</Table.Cell>
+                                <Table.Cell>
+                                    {lead.attachment ?                                     
+                                        <Button as="a" href={lead.attachment} target="_blank">
+                                            <Icon name='download' />
+                                        </Button> : ""
+                                    }
+                                </Table.Cell>
                                 <Table.Cell>                                
                                     <Button onClick={this.props.deleteLead.bind(this, lead.id)} color="red" icon>
                                         	<Icon name="trash alternate" />

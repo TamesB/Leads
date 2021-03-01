@@ -13,6 +13,7 @@ import {
     List,
     Menu,
     Segment,
+    MenuItem,
   } from 'semantic-ui-react'
   
 export class HeaderMenu extends Component {
@@ -41,14 +42,21 @@ export class HeaderMenu extends Component {
               >
                 Home
               </Menu.Item>
-            <Menu.Item
-                position="right"
-                name='logout'
-                active={activeItem === 'logout'}
-                onClick={() => {this.handleItemClick; this.props.logout()}}
-              >
-                Logout
-              </Menu.Item>
+              <Menu.Menu position="right">
+
+                {isAuthenticated ? 
+                <Menu.Item disabled>
+                  Welcome, {user.username}!
+                </Menu.Item> : <MenuItem></MenuItem>}
+
+                <Menu.Item
+                    name='logout'
+                    active={activeItem === 'logout'}
+                    onClick={() => {this.handleItemClick; this.props.logout()}}
+                  >
+                    Logout
+                </Menu.Item>
+              </Menu.Menu>
           </Fragment>
 
         );
@@ -76,7 +84,7 @@ export class HeaderMenu extends Component {
         );
 
         return (
-            <Menu style={{margin: '0 0 2vh 0'}}>
+            <Menu style={{margin: '0 0 2vh 0'}} fixed>
               <Menu.Item>
                 <img src='https://react.semantic-ui.com/logo.png' />
               </Menu.Item>

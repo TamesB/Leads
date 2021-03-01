@@ -10,34 +10,35 @@ export class LeadsForm extends Component {
         name: '',
         email: '',
         message: '',
-        file: null,
+        attachment: null,
     }
     
     static propTypes = {
-        addLead: PropTypes.func.isRequired
+        addLead: PropTypes.func.isRequired,
+        isLoading: PropTypes.bool
     };
 
     onChange = e => this.setState({ [e.target.name]: e.target.value });
 
-    fileChange = (event) => {
-        SetNewFile( event.target.files[0] );
+    fileChange = e => {
+        this.setState({ [e.target.name]: e.target.files[0] });
     };
 
     onSubmit = e => {
         e.preventDefault();
-        const { name, email, message, file } = this.state;
-        const lead = { name, email, message, file };
+        const { name, email, message, attachment } = this.state;
+        const lead = { name, email, message, attachment };
         this.props.addLead(lead)
         this.setState({
             name: "",
             email: "",
             message: "",
-            file: null,
+            attachment: null,
         })
     };
 
     render() {
-        const { name, email, message, file } = this.state;
+        const { name, email, message, attachment } = this.state;
         const form_padding = {
             padding: "0 10vw 0 10vw"
         }
@@ -70,11 +71,12 @@ export class LeadsForm extends Component {
                                 <Form.Input 
                                 type="file" 
                                 id="file" 
+                                name="attachment"
                                 hidden 
                                 label="Upload Attachment"
                                 onChange={this.fileChange} 
                                 />
-                                <Button type="submit" primary>Submit</Button>
+                                <Button type="submit" loading={this.props.isLoading} primary>Submit</Button>
                         </Form>
                     </div>
                 </Fragment>
@@ -82,4 +84,8 @@ export class LeadsForm extends Component {
     }
 }
 
-export default connect(null, { addLead })(LeadsForm);
+const mapStateToProps = state => ({
+    isLoading: state.leads.isLoading
+});
+
+export default connect(mapStateToProps, { addLead })(LeadsForm);

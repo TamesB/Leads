@@ -6,4 +6,5 @@ The backend uses the Django REST Framework, the frontend is made with React, Red
 * User authentication (Log-in, Register, Log-out)
 * Private Routing (react-router-dom)
 * CRUD Leads (Form for making a lead (POST), GET user leads, DELETE lead)
+* Basic file uploading / viewing
 * Alert system (react-alert)

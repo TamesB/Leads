@@ -15,4 +15,6 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const GET_LEADS = 'GET_LEADS';
 export const DELETE_LEAD = 'DELETE_LEAD';
 export const ADD_LEAD = 'ADD_LEAD';
+export const ADD_LEAD_LOADING = 'ADD_LEAD_LOADING';
+export const ADD_LEAD_LOADED = 'ADD_LEAD_LOADED';
 export const GET_ERRORS = 'GET_ERRORS';
